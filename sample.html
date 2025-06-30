@@ -1,0 +1,267 @@
+<style>
+  .hidden {
+    display: none !important;
+  }
+  /* Container */
+
+  @media (max-width: 768px) {
+    .promo {
+      padding: 0 16px;
+    }
+  }
+
+  /* HTML Elements */
+  .promo p {
+    font-size: 18px;
+  }
+
+  .promo a {
+    color: #4ab356;
+    text-decoration: underline;
+    font-weight: 700;
+  }
+
+  .promo p:first-child {
+    font-size: 18px;
+    margin-top: 16px;
+  }
+
+  .promo h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #4ab356;
+    text-align: center;
+  }
+
+  .promo h3 {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .promo hr {
+    border: 1px solid #707070;
+    margin: 32px auto;
+    width: 50%;
+  }
+
+  .light-bg .promo hr {
+    border: 1px solid #a0a0a0;
+    margin: 32px auto;
+    width: 50%;
+  }
+
+  .promo b {
+    color: #d4af37;
+  }
+
+  /* Table */
+  table.promo-table {
+    border-collapse: collapse;
+    text-align: center;
+    margin: 32px auto;
+    min-width: 100%;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.35);
+  }
+
+  .promo-table th,
+  .promo-table td {
+    border: 1px solid #232323;
+  }
+
+  .promo-table th,
+  .promo-table td {
+    padding: 8px 16px;
+    font-weight: 400;
+  }
+
+  .promo-table th {
+    background-color: #4caf51;
+    font-weight: 700;
+  }
+
+  .light-bg .promo-table th,
+  .light-bg .promo-table td {
+    border-color: #adadad;
+  }
+
+  /* Video player*/
+  .video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio (9 / 16 = 0.5625) */
+    overflow: hidden;
+  }
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  /* Custom styling for horizontal steps */
+  .steps-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 12px;
+    margin: 32px 0;
+  }
+
+  @media (max-width: 768px) {
+    .steps-container {
+      grid-template-columns: 1fr;
+    }
+
+    .button.hide-desktop {
+      display: block !important;
+    }
+    .promo .step-image-container {
+      max-width: 40px;
+    }
+  }
+
+  .step-container {
+    text-align: center;
+  }
+
+  .step-container p {
+    line-height: 1.35;
+  }
+
+  .step-image-container {
+    max-width: 50px;
+    margin: 0 auto;
+  }
+
+  .step-image-container img {
+    width: 100%;
+  }
+
+  /* Buttons */
+  .button-group {
+    text-align: center;
+  }
+
+  .button {
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    background-color: #4ab356;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    min-width: 200px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .button:disabled {
+    background-color: #656565;
+    cursor: not-allowed;
+  }
+  a.button {
+    display: inline-block;
+  }
+
+  /* Helper Classes */
+  .hide-desktop {
+    display: none !important;
+  }
+
+  @media (max-width: 768px) {
+    .button.hide-desktop {
+      display: block !important;
+    }
+  }
+
+  .center {
+    text-align: center;
+  }
+</style>
+<div class="promo">
+  <p>
+    Beginne dein <b>Sportsbet.io-Abenteuer</b> mit doppeltem Nervenkitzel, ganz
+    gleich, ob auf dem Spielfeld oder an den Walzen! ⚽🎰 Neue Spieler erhalten
+    einen <b>100%-Bonus bis zu 300 USDT</b> für Sport oder Casino. Egal, ob du
+    deinem Lieblingsteam die Daumen drückst oder auf den großen Casino-Gewinn
+    hoffst, dieses Angebot sichert dir einen unvergesslichen Start. Wähle deinen
+    Bonus, zahle ein und leg gleich mit dem Spielen oder Wetten los!
+  </p>
+
+  <hr />
+
+  <h2>Gewinne in wenigen leichten Schritten:</h2>
+  <div class="steps-container">
+    <div class="step-container">
+      <div class="step-image-container">
+        <img
+          src="https://sportsbet.imgix.net/2024/July/d9603704-a8d1-4fdb-a2f1-de7b5a67c3ea.png"
+          alt="step one"
+        />
+      </div>
+      <div>
+        <p>
+          Aktiviere deinen bevorzugten Bonus, ob
+          <b>'Champions Welcome Bonus - Sports'</b> oder
+          <b>'Champions Welcome Bonus - Casino'</b> im Bereich 'Belohnungen'
+          deines Spielkontos.
+        </p>
+      </div>
+    </div>
+    <div class="step-container">
+      <div class="step-image-container">
+        <img
+          src="https://sportsbet.imgix.net/2024/July/96deb5a5-5d0c-44c0-b55a-2d2848d1fcea.png"
+          alt="step two"
+        />
+      </div>
+      <div>
+        <p>
+          Zahle mindestens
+          <b
+            >{{currencyReplace 'USDT' 10 '{"mBTC": "0.1", "TRX": "50", "JPY":
+            "1500", "TON": "2"}' }}</b
+          >
+          ein.
+        </p>
+      </div>
+    </div>
+    <div class="step-container">
+      <div class="step-image-container">
+        <img
+          src="https://sportsbet.imgix.net/2024/July/784c6fc6-7b21-4219-8ec6-30bd54c3dbb2.png"
+          alt="step three"
+        />
+      </div>
+      <div>
+        <p>
+          Profitiere von einem <b>100%-Bonus</b> bis zu
+          <b
+            >{{currencyReplace 'USDT' 300 '{"mBTC": "3", "TRX": "1500", "JPY":
+            "45000", "TON": "60"}' }}</b
+          >* für Sport oder Casino.
+        </p>
+      </div>
+    </div>
+  </div>
+  <p>
+    <i
+      >*Die Boni unterliegen einer 10-fachen Umsatzanforderung auf Sport und
+      einer 40-fachen Umsatzanforderung auf Casino.</i
+    >
+  </p>
+  <hr />
+</div>
+<div class="center">
+  <a class="button" href="/casino/profile/rewards">Zum Bonus</a
+  ><a
+    class="hidden button"
+    data-flutter-anchor="true"
+    href="/home/account/rewards/casino"
+    target="_blank"
+    ><span style="color: #ffffff">Zum Bonus</span></a
+  >
+</div>
