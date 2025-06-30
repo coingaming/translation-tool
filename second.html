@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Translation tool</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-gray-50 w-full h-full">
+    <main class="container mx-auto p-8 flex flex-col gap-10">
+      <section class="flex flex-col gap-3">
+        <h1 class="text-3xl text-center font-bold">Translation tool</h1>
+        <textarea
+          class="border w-full border-gray-300 rounded-lg bg-white text-gray-600 p-2 min-h-[100px]"
+          name=""
+          id="input-html"
+          placeholder="Paste HTML content here..."
+          rows="6"
+        ></textarea>
+      </section>
+      <section class="flex gap-12">
+        <div class="flex flex-col w-full gap-1">
+          <h3 class="font-semibold text-center">Translated result</h3>
+          <div
+            class="border rounded-lg border-gray-300 p-4 border-dashed bg-white"
+            id="translated-content"
+          >
+            <div class="text-gray-400 text-center text-sm py-5">
+              here will be translated result
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col w-full gap-1">
+          <h3 class="font-semibold text-center">Texts for translation</h3>
+          <div
+            class="border rounded-lg border-gray-300 p-4 border-dashed bg-white flex flex-col gap-2"
+            id="translation-rows"
+          >
+            <div class="text-gray-400 text-center text-sm py-5">
+              here will be text for translate
+            </div>
+          </div>
+        </div>
+      </section>
+      <button
+        class="bg-cyan-600 w-fit px-12 py-2 text-white rounded-md mx-auto hover:bg-cyan-600/90 cursor-pointer text-xl"
+        id="get-html-button"
+      >
+        Get translated HTML
+      </button>
+    </main>
+    <script src="./second-script.js"></script>
+  </body>
+</html>
