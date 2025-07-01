@@ -12,31 +12,38 @@
           class="border w-full border-gray-300 rounded-lg bg-white text-gray-600 p-2 min-h-[100px]"
           name=""
           id="input-html"
-          placeholder="Paste HTML content here..."
-          rows="6"
+          placeholder="Paste origin HTML here..."
+          rows="4"
         ></textarea>
+        <div>
+          <button
+            class="bg-white w-fit px-8 py-1 text-gray-500 border border-gray-300 rounded-md mx-auto hover:bg-gray-50 hover:text-gray-700 cursor-pointer"
+            id="reset-button"
+          >
+            Reset
+          </button>
+        </div>
       </section>
       <section class="flex gap-12">
         <div class="flex flex-col w-full gap-1">
-          <h3 class="font-semibold text-center">Original</h3>
+          <h3 class="font-semibold text-center">Translated result</h3>
           <div
             class="border rounded-lg border-gray-300 p-4 border-dashed bg-white"
-            id="original-content"
+            id="translated-content"
           >
             <div class="text-gray-400 text-center text-sm py-5">
-              here will be original content
+              here will be translated result
             </div>
           </div>
         </div>
         <div class="flex flex-col w-full gap-1">
-          <h3 class="font-semibold text-center">Translated</h3>
+          <h3 class="font-semibold text-center">Texts for translation</h3>
           <div
-            class="border rounded-lg border-gray-300 p-4 border-dashed bg-white"
-            id="translated-content"
-            contenteditable="true"
+            class="border rounded-lg border-gray-300 p-4 border-dashed bg-white flex flex-col gap-2"
+            id="translation-rows"
           >
             <div class="text-gray-400 text-center text-sm py-5">
-              here will be editable content
+              here will be texts for translate
             </div>
           </div>
         </div>
