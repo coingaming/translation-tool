@@ -3,13 +3,32 @@
     <meta charset="UTF-8" />
     <title>Translation tool</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-piccolo: rgb(242, 89, 13);
+        --color-bulma: rgb(0, 0, 0);
+        --color-gohan: rgb(249, 247, 246);
+        --color-beerus: rgb(224, 224, 224);
+        --color-goku: rgb(255, 255, 255);
+        --color-trunks: rgb(126, 117, 114);
+      }
+
+      .sb {
+        --color-piccolo: rgb(73, 179, 86);
+        --color-bulma: rgb(255, 255, 255);
+        --color-gohan: rgb(44, 50, 58);
+        --color-beerus: rgb(55, 61, 69);
+        --color-goku: rgb(26, 33, 42);
+        --color-trunks: rgb(141, 157, 168);
+      }
+    </style>
   </head>
-  <body class="bg-gray-50 w-full h-full">
+  <body class="bg-goku text-bulma w-full h-full bc">
     <main class="container mx-auto p-8 flex flex-col gap-10">
       <section class="flex flex-col gap-3">
         <h1 class="text-3xl text-center font-bold">Translation tool</h1>
         <textarea
-          class="border w-full border-gray-300 rounded-lg bg-white text-gray-600 p-2 min-h-[100px]"
+          class="border w-full border-beerus rounded-lg bg-goku text-bulma p-2 min-h-[100px]"
           name=""
           id="input-html"
           placeholder="Paste origin HTML here..."
@@ -17,7 +36,7 @@
         ></textarea>
         <div>
           <button
-            class="bg-white w-fit px-8 py-1 text-gray-500 border border-gray-300 rounded-md mx-auto hover:bg-gray-50 hover:text-gray-700 cursor-pointer"
+            class="bg-gohan w-fit px-8 py-1 text-bulma border border-beerus rounded-md mx-auto hover:bg-goku cursor-pointer"
             id="reset-button"
           >
             Reset
@@ -28,10 +47,10 @@
         <div class="flex flex-col w-full gap-1">
           <h3 class="font-semibold text-center">Translated result</h3>
           <div
-            class="border rounded-lg border-gray-300 p-4 border-dashed bg-white"
+            class="border rounded-lg border-beerus p-4 border-dashed bg-goku [&_div]:text-bulma [&_iframe]:max-w-full [&_table]:text-base [&_img]:inline [&_p]:my-4 [&_p]:!text-bulma [&_span]:!text-bulma [&_ol]:list-decimal [&_ol]:text-base [&_ol]:[margin-block:1rem] [&_ol]:[margin-inline:0] [&_ol]:[padding-inline-start:2.5rem] [&_ul]:list-disc [&_ul]:text-base [&_ul]:[margin-block:1rem] [&_ul]:[margin-inline:0] [&_ul]:[padding-inline-start:2.5rem] [&_.pt-button]:text-sm [&_.pt-button]:bg-piccolo [&_.pt-button]:text-gohan [&_.pt-button]:rounded-md [&_.pt-button]:h-10 [&_.pt-button]:font-semibold [&_.pt-button]:inline-flex [&_.pt-button]:items-center [&_.pt-button]:justify-center [&_.pt-button]:w-full [&_.table-wrapper]:overflow-scroll [&_table]:w-full [&_table]:border-collapse [&_th]:text-left [&_th]:border-b [&_th]:border-beerus [&_th]:font-medium [&_th]:border-r [&_th]:p-3 [&_th]:bg-gohan [&_th:last-child]:border-none [&_tr]:border-b [&_tr]:border-beerus [&_tr:last-child]:border-none [&_td]:border-r [&_td]:border-beerus [&_td]:p-3 [&_td:last-child]:border-none [&_h3]:mb-2 [&_h3]:text-xl [&_h3]:font-semibold text-bulma [&_p]:font-normal [&_p]:text-base mb-2 [&_h3]:mt-2 [&_a]:text-bulma [&_a]:active:text-hit [&_a]:underline [&_li]:line-height-1.5 [&_terms-link]:cursor-pointer [&_terms-link]:font-size-14 [&_terms-link]:text-center [&_.pt-button.cms_visibility_logged_out]:hidden"
             id="translated-content"
           >
-            <div class="text-gray-400 text-center text-sm py-5">
+            <div class="!text-trunks text-center text-sm py-5">
               here will be translated result
             </div>
           </div>
@@ -39,10 +58,10 @@
         <div class="flex flex-col w-full gap-1">
           <h3 class="font-semibold text-center">Texts for translation</h3>
           <div
-            class="border rounded-lg border-gray-300 p-4 border-dashed bg-white flex flex-col gap-2"
+            class="border rounded-lg border-beerus p-4 border-dashed bg-goku flex flex-col gap-2"
             id="translation-rows"
           >
-            <div class="text-gray-400 text-center text-sm py-5">
+            <div class="text-trunks text-center text-sm py-5">
               here will be texts for translate
             </div>
           </div>

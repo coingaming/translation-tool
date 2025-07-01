@@ -22,8 +22,10 @@ function createInputElement(value, idx) {
   const input = document.createElement("input");
   input.type = "text";
   input.value = value?.trim();
+  input.dataset.initialValue = value.trim();
   input.dataset.idx = idx;
-  input.className = "block w-full px-2 py-1 border border-gray-300 rounded-md";
+  input.name = "translation-input-" + idx;
+  input.className = "block w-full px-2 py-1 border border-beerus rounded-md";
   return input;
 }
 
@@ -36,8 +38,24 @@ function renderTranslationInputs(textNodes) {
   translationRows.innerHTML = "";
   textNodes.forEach((node, idx) => {
     const input = createInputElement(node.nodeValue, idx);
+
     input.addEventListener("input", (e) => {
       textNodes[idx].nodeValue = e.target.value;
+      if (e.target.value.trim() !== input.dataset.initialValue) {
+        input.classList.add("bg-lime-50", "border-lime-500", "text-gray-700");
+      } else {
+        input.classList.remove(
+          "bg-lime-50",
+          "border-lime-500",
+          "text-gray-700"
+        );
+      }
+
+      if (e.target.value.trim() === "") {
+        input.classList.add("bg-red-50", "border-red-500", "text-gray-700");
+      } else {
+        input.classList.remove("bg-red-50", "border-red-500", "text-gray-700");
+      }
     });
 
     input.addEventListener("focus", () => {
@@ -45,12 +63,12 @@ function renderTranslationInputs(textNodes) {
       if (
         node.parentNode &&
         node.parentNode.classList &&
-        node.parentNode.classList.contains("bg-yellow-200 text-black")
+        node.parentNode.classList.contains("bg-yellow-900 !text-red")
       ) {
         return;
       }
       const span = document.createElement("span");
-      span.className = "bg-yellow-200 text-black";
+      span.className = "bg-green-800 !text-red";
       node.parentNode.insertBefore(span, node);
       span.appendChild(node);
       input._highlightSpan = span;
@@ -77,7 +95,7 @@ function renderTranslationInputs(textNodes) {
 
 function getEmptyStateElement(text) {
   const emptyState = document.createElement("div");
-  emptyState.className = "text-gray-400 text-center text-sm py-5";
+  emptyState.className = "!text-trunks text-center text-sm py-5";
   emptyState.innerText = text;
   return emptyState;
 }
