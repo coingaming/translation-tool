@@ -19,19 +19,19 @@ function extractTextNodes(node, nodes = []) {
   return nodes;
 }
 
-function createInputElement(value, idx) {
+function createTranslationInput(value, idx) {
   const input = document.createElement("input");
   input.type = "text";
   input.value = value?.trim();
   input.dataset.initialValue = value.trim();
   input.dataset.idx = idx;
-  input.name = "translation-input-" + idx;
+  input.name = `translation-input-${idx}`;
   input.className =
     "block w-full px-2 py-1 border border-beerus rounded-md outline-none focus:ring-1 focus:ring-blue-600";
   return input;
 }
 
-function getTextNodes(html) {
+function getTextNodesFromHtml(html) {
   translatedContent.innerHTML = html;
   return extractTextNodes(translatedContent);
 }
@@ -39,63 +39,72 @@ function getTextNodes(html) {
 function renderTranslationInputs(textNodes) {
   translationRows.innerHTML = "";
   textNodes.forEach((node, idx) => {
-    const input = createInputElement(node.nodeValue, idx);
-
-    input.addEventListener("input", (e) => {
-      textNodes[idx].nodeValue = e.target.value;
-
-      if (
-        e.target.value.trim() !== input.dataset.initialValue &&
-        e.target.value.trim() !== ""
-      ) {
-        input.classList.add("!bg-success/10", "!border-success");
-      } else {
-        input.classList.remove("!bg-success/10", "!border-success");
-      }
-
-      if (e.target.value.trim() === "") {
-        input.classList.add("!bg-danger/10", "!border-danger");
-      } else {
-        input.classList.remove("!bg-danger/10", "!border-danger");
-      }
-    });
-
-    input.addEventListener("focus", () => {
-      const node = textNodes[idx];
-      if (
-        node.parentNode &&
-        node.parentNode.classList &&
-        node.parentNode.classList.contains("bg-highlight")
-      ) {
-        return;
-      }
-      const span = document.createElement("span");
-      span.className = "bg-highlight !text-black";
-      node.parentNode.insertBefore(span, node);
-      span.appendChild(node);
-      input._highlightSpan = span;
-    });
-
-    input.addEventListener("blur", () => {
-      const span = input._highlightSpan;
-      if (span && span.parentNode) {
-        const textNode = span.firstChild;
-        span.parentNode.insertBefore(textNode, span);
-        span.parentNode.removeChild(span);
-        input._highlightSpan = null;
-      }
-    });
-
-    input.addEventListener("blur", () => {
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-    });
-
+    const input = createTranslationInput(node.nodeValue, idx);
+    attachInputEvents(input, node, textNodes, idx);
     translationRows.appendChild(input);
   });
 }
 
-function getEmptyStateElement(text) {
+function attachInputEvents(input, node, textNodes, idx) {
+  input.addEventListener("input", (e) => {
+    textNodes[idx].nodeValue = e.target.value;
+    updateInputStyles(input, e.target.value, input.dataset.initialValue);
+  });
+
+  input.addEventListener("focus", () => {
+    highlightTextNode(node, input);
+  });
+
+  input.addEventListener("blur", () => {
+    removeHighlight(input);
+    clearSelection();
+  });
+}
+
+function updateInputStyles(input, value, initialValue) {
+  if (value.trim() !== initialValue && value.trim() !== "") {
+    input.classList.add("!bg-success/10", "!border-success");
+  } else {
+    input.classList.remove("!bg-success/10", "!border-success");
+  }
+  if (value.trim() === "") {
+    input.classList.add("!bg-danger/10", "!border-danger");
+  } else {
+    input.classList.remove("!bg-danger/10", "!border-danger");
+  }
+}
+
+function highlightTextNode(node, input) {
+  if (
+    node.parentNode &&
+    node.parentNode.classList &&
+    node.parentNode.classList.contains("bg-highlight")
+  ) {
+    return;
+  }
+  const span = document.createElement("span");
+  span.className = "bg-highlight !text-black";
+  node.parentNode.insertBefore(span, node);
+  span.appendChild(node);
+  input._highlightSpan = span;
+}
+
+function removeHighlight(input) {
+  const span = input._highlightSpan;
+  if (span && span.parentNode) {
+    const textNode = span.firstChild;
+    span.parentNode.insertBefore(textNode, span);
+    span.parentNode.removeChild(span);
+    input._highlightSpan = null;
+  }
+}
+
+function clearSelection() {
+  const selection = window.getSelection();
+  selection.removeAllRanges();
+}
+
+function createEmptyStateElement(text) {
   const emptyState = document.createElement("div");
   emptyState.className = "!text-trunks text-center text-sm py-5";
   emptyState.innerText = text;
@@ -106,10 +115,10 @@ function resetContainers() {
   translatedContent.innerHTML = "";
   translationRows.innerHTML = "";
   translatedContent.appendChild(
-    getEmptyStateElement("here will be translated result")
+    createEmptyStateElement("here will be translated result")
   );
   translationRows.appendChild(
-    getEmptyStateElement("here will be texts for translate")
+    createEmptyStateElement("here will be texts for translate")
   );
 }
 
@@ -120,7 +129,6 @@ function showNotification(message, className = "bg-green-600") {
     className;
   notification.innerText = message;
   document.body.appendChild(notification);
-
   setTimeout(() => {
     document.body.removeChild(notification);
   }, 2000);
@@ -139,7 +147,7 @@ inputHtml.addEventListener("input", () => {
   if (!inputHtml.value.trim()) {
     resetContainers();
   } else {
-    const textNodes = getTextNodes(inputHtml.value);
+    const textNodes = getTextNodesFromHtml(inputHtml.value);
     renderTranslationInputs(textNodes);
   }
 });
@@ -169,3 +177,5 @@ productButtons.addEventListener("click", (event) => {
     event.target.classList.add("bg-piccolo", "text-goten");
   }
 });
+
+resetContainers();
