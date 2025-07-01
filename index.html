@@ -1,7 +1,8 @@
-<html>
+<html class="">
   <head>
     <meta charset="UTF-8" />
     <title>Translation tool</title>
+    <meta name="description" content="Translation tool for HTML content" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
       @theme {
@@ -11,6 +12,11 @@
         --color-beerus: rgb(224, 224, 224);
         --color-goku: rgb(255, 255, 255);
         --color-trunks: rgb(126, 117, 114);
+        --color-goten: rgb(255, 255, 255);
+
+        --color-highlight: rgb(242, 207, 90);
+        --color-success: rgb(121, 166, 25);
+        --color-danger: rgb(212, 54, 36);
       }
 
       .sb {
@@ -20,10 +26,11 @@
         --color-beerus: rgb(55, 61, 69);
         --color-goku: rgb(26, 33, 42);
         --color-trunks: rgb(141, 157, 168);
+        --color-goten: rgb(255, 255, 255);
       }
     </style>
   </head>
-  <body class="bg-goku text-bulma w-full h-full bc">
+  <body class="bg-goku text-bulma w-full h-full bc_ sb_">
     <main class="container mx-auto p-8 flex flex-col gap-10">
       <section class="flex flex-col gap-3">
         <h1 class="text-3xl text-center font-bold">Translation tool</h1>
@@ -31,23 +38,37 @@
           class="border w-full border-beerus rounded-lg bg-goku text-bulma p-2 min-h-[100px]"
           name=""
           id="input-html"
-          placeholder="Paste origin HTML here..."
+          placeholder="Paste HTML here..."
           rows="4"
         ></textarea>
-        <div>
+        <div class="flex justify-between">
           <button
-            class="bg-gohan w-fit px-8 py-1 text-bulma border border-beerus rounded-md mx-auto hover:bg-goku cursor-pointer"
+            class="bg-gohan w-fit px-8 py-1 text-bulma border border-beerus rounded-md hover:bg-goku cursor-pointer"
             id="reset-button"
           >
             Reset
           </button>
+          <div class="flex gap-2" id="products">
+            <button
+              class="bg-gohan w-fit px-8 py-1 text-bulma border border-beerus rounded-md cursor-pointer"
+              data-product="sb"
+            >
+              Sportsbet
+            </button>
+            <button
+              class="bg-gohan w-fit px-8 py-1 text-bulma border border-beerus rounded-md cursor-pointer bg-piccolo text-goten"
+              data-product="bc"
+            >
+              Bitcasino
+            </button>
+          </div>
         </div>
       </section>
       <section class="flex gap-12">
         <div class="flex flex-col w-full gap-1">
           <h3 class="font-semibold text-center">Translated result</h3>
           <div
-            class="border rounded-lg border-beerus p-4 border-dashed bg-goku [&_div]:text-bulma [&_iframe]:max-w-full [&_table]:text-base [&_img]:inline [&_p]:my-4 [&_p]:!text-bulma [&_span]:!text-bulma [&_ol]:list-decimal [&_ol]:text-base [&_ol]:[margin-block:1rem] [&_ol]:[margin-inline:0] [&_ol]:[padding-inline-start:2.5rem] [&_ul]:list-disc [&_ul]:text-base [&_ul]:[margin-block:1rem] [&_ul]:[margin-inline:0] [&_ul]:[padding-inline-start:2.5rem] [&_.pt-button]:text-sm [&_.pt-button]:bg-piccolo [&_.pt-button]:text-gohan [&_.pt-button]:rounded-md [&_.pt-button]:h-10 [&_.pt-button]:font-semibold [&_.pt-button]:inline-flex [&_.pt-button]:items-center [&_.pt-button]:justify-center [&_.pt-button]:w-full [&_.table-wrapper]:overflow-scroll [&_table]:w-full [&_table]:border-collapse [&_th]:text-left [&_th]:border-b [&_th]:border-beerus [&_th]:font-medium [&_th]:border-r [&_th]:p-3 [&_th]:bg-gohan [&_th:last-child]:border-none [&_tr]:border-b [&_tr]:border-beerus [&_tr:last-child]:border-none [&_td]:border-r [&_td]:border-beerus [&_td]:p-3 [&_td:last-child]:border-none [&_h3]:mb-2 [&_h3]:text-xl [&_h3]:font-semibold text-bulma [&_p]:font-normal [&_p]:text-base mb-2 [&_h3]:mt-2 [&_a]:text-bulma [&_a]:active:text-hit [&_a]:underline [&_li]:line-height-1.5 [&_terms-link]:cursor-pointer [&_terms-link]:font-size-14 [&_terms-link]:text-center [&_.pt-button.cms_visibility_logged_out]:hidden"
+            class="border rounded-lg border-beerus p-4 border-dashed bg-goku h-full [&_div]:text-bulma [&_iframe]:max-w-full [&_table]:text-base [&_img]:inline [&_p]:my-4 [&_p]:text-bulma [&_span]:text-bulma [&_ol]:list-decimal [&_ol]:text-base [&_ol]:[margin-block:1rem] [&_ol]:[margin-inline:0] [&_ol]:[padding-inline-start:2.5rem] [&_ul]:list-disc [&_ul]:text-base [&_ul]:[margin-block:1rem] [&_ul]:[margin-inline:0] [&_ul]:[padding-inline-start:2.5rem] [&_.pt-button]:text-sm [&_.pt-button]:bg-piccolo [&_.pt-button]:text-gohan [&_.pt-button]:rounded-md [&_.pt-button]:h-10 [&_.pt-button]:font-semibold [&_.pt-button]:inline-flex [&_.pt-button]:items-center [&_.pt-button]:justify-center [&_.pt-button]:w-full [&_.table-wrapper]:overflow-scroll [&_table]:w-full [&_table]:border-collapse [&_th]:text-left [&_th]:border-b [&_th]:border-beerus [&_th]:font-medium [&_th]:border-r [&_th]:p-3 [&_th]:bg-gohan [&_th:last-child]:border-none [&_tr]:border-b [&_tr]:border-beerus [&_tr:last-child]:border-none [&_td]:border-r [&_td]:border-beerus [&_td]:p-3 [&_td:last-child]:border-none [&_h3]:mb-2 [&_h3]:text-xl [&_h3]:font-semibold text-bulma [&_p]:font-normal [&_p]:text-base [&_h3]:mt-2 [&_a]:text-bulma [&_a]:active:text-hit [&_a]:underline [&_li]:line-height-1.5 [&_terms-link]:cursor-pointer [&_terms-link]:font-size-14 [&_terms-link]:text-center [&_.pt-button.cms_visibility_logged_out]:hidden"
             id="translated-content"
           >
             <div class="!text-trunks text-center text-sm py-5">

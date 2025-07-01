@@ -3,6 +3,7 @@ const translatedContent = document.getElementById("translated-content");
 const translationRows = document.getElementById("translation-rows");
 const getHTMLButton = document.getElementById("get-html-button");
 const resetButton = document.getElementById("reset-button");
+const productButtons = document.getElementById("products");
 
 function extractTextNodes(node, nodes = []) {
   if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim()) {
@@ -25,7 +26,8 @@ function createInputElement(value, idx) {
   input.dataset.initialValue = value.trim();
   input.dataset.idx = idx;
   input.name = "translation-input-" + idx;
-  input.className = "block w-full px-2 py-1 border border-beerus rounded-md";
+  input.className =
+    "block w-full px-2 py-1 border border-beerus rounded-md outline-none focus:ring-1 focus:ring-blue-600";
   return input;
 }
 
@@ -41,20 +43,20 @@ function renderTranslationInputs(textNodes) {
 
     input.addEventListener("input", (e) => {
       textNodes[idx].nodeValue = e.target.value;
-      if (e.target.value.trim() !== input.dataset.initialValue) {
-        input.classList.add("bg-lime-50", "border-lime-500", "text-gray-700");
+
+      if (
+        e.target.value.trim() !== input.dataset.initialValue &&
+        e.target.value.trim() !== ""
+      ) {
+        input.classList.add("!bg-success/10", "!border-success");
       } else {
-        input.classList.remove(
-          "bg-lime-50",
-          "border-lime-500",
-          "text-gray-700"
-        );
+        input.classList.remove("!bg-success/10", "!border-success");
       }
 
       if (e.target.value.trim() === "") {
-        input.classList.add("bg-red-50", "border-red-500", "text-gray-700");
+        input.classList.add("!bg-danger/10", "!border-danger");
       } else {
-        input.classList.remove("bg-red-50", "border-red-500", "text-gray-700");
+        input.classList.remove("!bg-danger/10", "!border-danger");
       }
     });
 
@@ -63,12 +65,12 @@ function renderTranslationInputs(textNodes) {
       if (
         node.parentNode &&
         node.parentNode.classList &&
-        node.parentNode.classList.contains("bg-yellow-900 !text-red")
+        node.parentNode.classList.contains("bg-highlight")
       ) {
         return;
       }
       const span = document.createElement("span");
-      span.className = "bg-green-800 !text-red";
+      span.className = "bg-highlight !text-black";
       node.parentNode.insertBefore(span, node);
       span.appendChild(node);
       input._highlightSpan = span;
@@ -156,4 +158,14 @@ getHTMLButton.addEventListener("click", () => {
     .catch((err) => {
       console.error("Failed to copy HTML: ", err);
     });
+});
+
+productButtons.addEventListener("click", (event) => {
+  if (event.target.tagName.toLowerCase() === "button") {
+    const product = event.target.dataset.product;
+    document.documentElement.className = product;
+    const buttons = productButtons.querySelectorAll("button");
+    buttons.forEach((btn) => btn.classList.remove("bg-piccolo", "text-goten"));
+    event.target.classList.add("bg-piccolo", "text-goten");
+  }
 });
