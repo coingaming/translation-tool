@@ -5,8 +5,17 @@ const getHTMLButton = document.getElementById("get-html-button");
 const resetButton = document.getElementById("reset-button");
 const productButtons = document.getElementById("products");
 
+function isTemplateNode(str) {
+  const templateRegex = /^\{\{.*\}\}$/;
+  return templateRegex.test(str);
+}
+
 function extractTextNodes(node, nodes = []) {
-  if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim()) {
+  if (
+    node.nodeType === Node.TEXT_NODE &&
+    !!node.nodeValue.trim() &&
+    !isTemplateNode(node?.nodeValue?.trim())
+  ) {
     nodes.push(node);
   } else if (
     node.nodeType === Node.ELEMENT_NODE &&
