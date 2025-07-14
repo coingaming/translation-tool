@@ -1,4 +1,4 @@
-<html class="">
+<html dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <title>Translation tool</title>
@@ -28,12 +28,27 @@
         --color-trunks: rgb(141, 157, 168);
         --color-goten: rgb(255, 255, 255);
       }
+
+      .button {
+        @apply bg-gohan w-fit px-8 py-1 text-bulma border border-beerus rounded-md hover:bg-goku cursor-pointer;
+      }
+      .button.active {
+        @apply bg-piccolo text-goten hover:bg-piccolo/80;
+      }
     </style>
   </head>
   <body class="bg-goku text-bulma w-full h-full bc_ sb_">
     <main class="container mx-auto p-8 flex flex-col gap-10">
       <section class="flex flex-col gap-3">
-        <h1 class="text-3xl text-center font-bold">Translation tool</h1>
+        <div
+          class="flex gap-2 items-center justify-between rtl:flex-row-reverse"
+        >
+          <h1 class="text-3xl text-center font-bold">Translation tool</h1>
+          <div class="flex gap-2 rtl:flex-row-reverse">
+            <button class="button active" data-direction="ltr">LTR</button>
+            <button class="button" data-direction="rtl">RTL</button>
+          </div>
+        </div>
         <textarea
           class="border w-full border-beerus rounded-lg bg-goku text-bulma p-2 min-h-[100px]"
           name=""
@@ -41,14 +56,16 @@
           placeholder="Paste HTML here..."
           rows="4"
         ></textarea>
-        <div class="flex justify-between">
-          <button
-            class="bg-gohan w-fit px-8 py-1 text-bulma border border-beerus rounded-md hover:bg-goku cursor-pointer"
-            id="reset-button"
-          >
-            Reset
-          </button>
-          <div class="flex gap-2" id="products">
+        <div class="flex justify-between rtl:flex-row-reverse">
+          <div class="flex gap-6 rtl:flex-row-reverse">
+            <button
+              class="bg-gohan w-fit px-8 py-1 text-bulma border border-beerus rounded-md hover:bg-goku cursor-pointer"
+              id="reset-button"
+            >
+              Reset
+            </button>
+          </div>
+          <div class="flex gap-2 rtl:flex-row-reverse" id="products">
             <button
               class="bg-gohan w-fit px-8 py-1 text-bulma border border-beerus rounded-md cursor-pointer"
               data-product="sb"
@@ -64,7 +81,7 @@
           </div>
         </div>
       </section>
-      <section class="flex gap-12">
+      <section class="flex gap-12 rtl:flex-row-reverse">
         <div class="flex flex-col w-full gap-1">
           <h3 class="font-semibold text-center">Translated result</h3>
           <div

@@ -4,6 +4,7 @@ const translationRows = document.getElementById("translation-rows");
 const getHTMLButton = document.getElementById("get-html-button");
 const resetButton = document.getElementById("reset-button");
 const productButtons = document.getElementById("products");
+const directionButtons = document.querySelectorAll("[data-direction]");
 
 let textNodes = [];
 
@@ -167,6 +168,16 @@ function showNotification(message, className = "bg-green-600") {
   }, 2000);
 }
 
+function switchDirection(e) {
+  const direction = e.target.dataset.direction;
+  const html = document.documentElement;
+  html.dir = direction;
+  directionButtons.forEach((button) => {
+    button.classList.remove("active");
+  });
+  e.target.classList.add("active");
+}
+
 translatedContent.addEventListener("click", (event) => {
   event.preventDefault();
 });
@@ -276,6 +287,10 @@ productButtons.addEventListener("click", (event) => {
     buttons.forEach((btn) => btn.classList.remove("bg-piccolo", "text-goten"));
     event.target.classList.add("bg-piccolo", "text-goten");
   }
+});
+
+directionButtons.forEach((button) => {
+  button.addEventListener("click", switchDirection);
 });
 
 resetContainers();
