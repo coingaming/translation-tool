@@ -46,12 +46,13 @@ function createTranslationInput(value, idx) {
   const input = document.createElement(translatedInputTagName);
   // input.type = "text";
   input.autocomplete = "off";
+  input.rows = 1;
   input.value = value?.trim();
   input.dataset.initialValue = value?.trim();
   input.dataset.idx = idx;
   input.name = `translation-input-${idx}`;
   input.className =
-    "block w-full px-2 py-1 border border-beerus rounded-md outline-none focus:ring-1 focus:ring-blue-600";
+    "block w-full px-2 py-1 border border-beerus rounded-md outline-none focus:ring-1 focus:ring-blue-600 min-h-[34px]";
   return input;
 }
 
