@@ -6,6 +6,7 @@ const resetButton = document.getElementById("reset-button");
 const productButtons = document.getElementById("products");
 const directionButtons = document.querySelectorAll("[data-direction]");
 
+const translatedInputTagName = "textarea";
 let textNodes = [];
 
 function isTemplateNode(str) {
@@ -42,8 +43,8 @@ document.addEventListener("selectionchange", (e) => {
 });
 
 function createTranslationInput(value, idx) {
-  const input = document.createElement("input");
-  input.type = "text";
+  const input = document.createElement(translatedInputTagName);
+  // input.type = "text";
   input.autocomplete = "off";
   input.value = value?.trim();
   input.dataset.initialValue = value?.trim();
@@ -72,15 +73,16 @@ function reRenderTranslationInputs() {
 }
 
 translationRows.addEventListener("input", (e) => {
-  if (e.target.tagName.toLowerCase() !== "input") {
+  if (e.target.tagName.toLowerCase() !== translatedInputTagName) {
     return;
   }
-  textNodes[e.target.dataset.idx].nodeValue = e.target.value;
-  updateInputStyles(e.target, e.target.value, e.target.dataset.initialValue);
+  const value = e.target.value;
+  textNodes[e.target.dataset.idx].nodeValue = value;
+  updateInputStyles(e.target, value, e.target.dataset.initialValue);
 });
 
 translationRows.addEventListener("focusin", (event) => {
-  if (event.target.tagName.toLowerCase() !== "input") {
+  if (event.target.tagName.toLowerCase() !== translatedInputTagName) {
     return;
   }
   const node = textNodes[event.target.dataset.idx];
@@ -88,11 +90,20 @@ translationRows.addEventListener("focusin", (event) => {
 });
 
 translationRows.addEventListener("focusout", (event) => {
-  if (event.target.tagName.toLowerCase() !== "input") {
+  if (event.target.tagName.toLowerCase() !== translatedInputTagName) {
     return;
   }
   removeHighlight(event.target);
   clearSelection();
+});
+
+translationRows.addEventListener("keydown", (event) => {
+  if (event.target.tagName.toLowerCase() !== translatedInputTagName) {
+    return;
+  }
+  if (event.key === "Enter") {
+    event.preventDefault();
+  }
 });
 
 function updateInputStyles(input, value, initialValue) {
