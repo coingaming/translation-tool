@@ -9,7 +9,7 @@ const directionButtons = document.querySelectorAll("[data-direction]");
 let textNodes = [];
 
 function isTemplateNode(str) {
-  const templateRegex = /^\{\{[\s\S]*\}\}$/;
+  const templateRegex = /^\{\{[\s\S]*\}\}$|^\{%\s*[\s\S]*\s*%\}$/;
   return templateRegex.test(str);
 }
 
