@@ -1,10 +1,12 @@
 const inputHtml = document.getElementById("input-html");
 const translatedContent = document.getElementById("translated-content");
 const translationRows = document.getElementById("translation-rows");
+const originalRows = document.getElementById("origin-rows");
 const getHTMLButton = document.getElementById("get-html-button");
 const resetButton = document.getElementById("reset-button");
 const productButtons = document.getElementById("products");
 const directionButtons = document.querySelectorAll("[data-direction]");
+const translationButtons = document.querySelectorAll("[data-rows]");
 
 const translatedInputTagName = "textarea";
 let textNodes = [];
@@ -42,7 +44,7 @@ document.addEventListener("selectionchange", (e) => {
   }
 });
 
-function createTranslationInput(value, idx) {
+function createTranslationInput(value, idx, readOnly = false) {
   const input = document.createElement(translatedInputTagName);
   // input.type = "text";
   input.autocomplete = "off";
@@ -51,9 +53,20 @@ function createTranslationInput(value, idx) {
   input.dataset.initialValue = value?.trim();
   input.dataset.idx = idx;
   input.name = `translation-input-${idx}`;
+  input.readOnly = readOnly;
   input.className =
     "block w-full px-2 py-1 border border-beerus rounded-md outline-none focus:ring-1 focus:ring-blue-600 min-h-[34px]";
   return input;
+}
+
+function createInputWrapper(idx) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "flex items-center gap-2";
+  const idxDiv = document.createElement("div");
+  idxDiv.className = "text-xs text-trunks/80";
+  idxDiv.innerText = `${idx + 1}`;
+  wrapper.appendChild(idxDiv);
+  return wrapper;
 }
 
 function getTextNodesFromHtml(html) {
@@ -63,9 +76,19 @@ function getTextNodesFromHtml(html) {
 
 function renderTranslationInputs() {
   translationRows.innerHTML = "";
+  originalRows.innerHTML = "";
+
   textNodes.forEach((node, idx) => {
     const input = createTranslationInput(node.nodeValue, idx);
-    translationRows.appendChild(input);
+    const wrapper = createInputWrapper(idx);
+    wrapper.appendChild(input);
+    translationRows.appendChild(wrapper);
+  });
+  textNodes.forEach((node, idx) => {
+    const input = createTranslationInput(node.nodeValue, idx, true);
+    const wrapper = createInputWrapper(idx);
+    wrapper.appendChild(input);
+    originalRows.appendChild(wrapper);
   });
 }
 function reRenderTranslationInputs() {
@@ -160,11 +183,15 @@ function createEmptyStateElement(text) {
 function resetContainers() {
   translatedContent.innerHTML = "";
   translationRows.innerHTML = "";
+  originalRows.innerHTML = "";
   translatedContent.appendChild(
     createEmptyStateElement("here will be translated result")
   );
   translationRows.appendChild(
     createEmptyStateElement("here will be texts for translate")
+  );
+  originalRows.appendChild(
+    createEmptyStateElement("here will be origin texts")
   );
 }
 
@@ -303,6 +330,28 @@ productButtons.addEventListener("click", (event) => {
 
 directionButtons.forEach((button) => {
   button.addEventListener("click", switchDirection);
+});
+
+translationButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    translationButtons.forEach((btn) => {
+      btn.classList.remove("active");
+      if (btn !== button) {
+        const otherId = btn.dataset.rows;
+        const other = document.getElementById(otherId);
+        if (other) {
+          other.classList.add("hidden");
+        }
+      }
+    });
+
+    const targetId = button.dataset.rows;
+    const target = document.getElementById(targetId);
+    event.target.classList.add("active");
+    if (target) {
+      target.classList.remove("hidden");
+    }
+  });
 });
 
 resetContainers();
